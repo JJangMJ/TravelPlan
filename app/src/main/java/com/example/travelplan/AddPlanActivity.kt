@@ -7,11 +7,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.travelplan.databinding.ActivityAddPlanBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 
 class AddPlanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddPlanBinding
+
+    var departureDate: LocalDate? = null
+    var endDate: LocalDate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,41 +35,44 @@ class AddPlanActivity : AppCompatActivity() {
         }
 
         binding.completeBtn.setOnClickListener {
-
             val destination = binding.destinationInputTv.text.toString()
-            val departureDate = binding.destinationInputTv.text.toString()
-            val endDate = binding.endDateBtn.text.toString()
 
-            val plan = Plan("", destination, departureDate, endDate)
+            if (destination.isEmpty()) {
+                Toast.makeText(this, "목적지를 입력하세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else if (departureDate == null) {
+                Toast.makeText(this, "출발날짜를 고르세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else if (endDate == null) {
+                Toast.makeText(this, "도착날짜를 고르세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 
             Log.d("@@@", destination)
-            Log.d("@@@", departureDate)
-            Log.d("@@@", endDate)
-            finish()
+            Log.d("@@@", departureDate!!.toString())
+            Log.d("@@@", endDate!!.toString())
         }
     }
 
     fun showDialog(dateBtn: String) {
-        val cal = Calendar.getInstance()
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            var dateString = ""
-            dateString = "${year}년 ${month+1}월 ${dayOfMonth}일"
-
-            // year, month, dayOfMonth 를 가지고 Date 자료형을 만들 줄 모른다.
-            // 당연히 모른다. Date 자료형을 처음 써보기 때문.
-            // 구글링
-
-            val departureDate : Date = cal.time
-            val endDate : Date = cal.time
+            val dateString  = "${year}-${month+1}-${dayOfMonth}"
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val date = LocalDate.parse(dateString, formatter)
 
             if(dateBtn == "departureDateBtn") {
                 binding.departureDateBtn.text = dateString
-
+                departureDate = date
             } else {
                 binding.endDateBtn.text = dateString
+                endDate = date
             }
         }
 
+        val cal = Calendar.getInstance()
         val dateDialog =
             DatePickerDialog(
                 this,
