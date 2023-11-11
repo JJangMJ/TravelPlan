@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".PlanActivity">
+
+    <TextView
+        android:id="@+id/destinationTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="목적지" />
+
+    <TextView
+        android:id="@+id/departureDateTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="출발 날짜" />
+
+    <TextView
+        android:id="@+id/endDateTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="도착 날짜" />
+</LinearLayout>

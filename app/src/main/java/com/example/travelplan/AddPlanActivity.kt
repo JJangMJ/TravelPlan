@@ -50,10 +50,12 @@ class AddPlanActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
-            Log.d("@@@", destination)
+            val plan = Plan("a", destination, departureDate!!, endDate!!)
+            Log.d("@@@", destination!!.toString())
             Log.d("@@@", departureDate!!.toString())
             Log.d("@@@", endDate!!.toString())
+
+            finish()
         }
     }
 

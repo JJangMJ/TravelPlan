@@ -25,13 +25,13 @@
             android:id="@+id/departureDateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="출발날짜선택" />
+            android:text="출발 날짜 선택" />
 
         <Button
             android:id="@+id/endDateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="도착날짜선택" />
+            android:text="도착 날짜 선택" />
 
         <Button
             android:id="@+id/completeBtn"
