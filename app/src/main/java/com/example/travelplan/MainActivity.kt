@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         var planList = ArrayList<Plan>()
-        planList.add(Plan("a", "김동욱병신", LocalDate.now(), LocalDate.now()))git
+        planList.add(Plan("a", "일본", LocalDate.now(), LocalDate.now()))
         planList.add(Plan("b", "중국", LocalDate.now(), LocalDate.now()))
         planList.add(Plan("c", "대만", LocalDate.now(), LocalDate.now()))
 
