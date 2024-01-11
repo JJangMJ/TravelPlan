@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelPlan"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC5LQJO0WLpJ_pWFAesDMugTgzCvHhzkNM" />
+
         <activity
             android:name=".SearchDestinationActivity"
             android:exported="false" />

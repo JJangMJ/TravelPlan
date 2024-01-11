@@ -3,6 +3,7 @@ package com.example.travelplan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan.databinding.ActivityMainBinding
 import java.time.LocalDate
@@ -27,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         planList.add(Plan("c", "대만", LocalDate.now(), LocalDate.now().plusDays(4)))
 
         val adapter = PlanAdapter(planList)
-        adapter.planList = planList
-
         binding.planListRv.adapter = adapter
         binding.planListRv.layoutManager = LinearLayoutManager(this)
 
