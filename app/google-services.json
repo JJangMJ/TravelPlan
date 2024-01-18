@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "349644960617",
+    "project_id": "able-involution-409101",
+    "storage_bucket": "able-involution-409101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349644960617:android:e50af19398b01045edc3f8",
+        "android_client_info": {
+          "package_name": "com.example.travelplan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5LQJO0WLpJ_pWFAesDMugTgzCvHhzkNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
