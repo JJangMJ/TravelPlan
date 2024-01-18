@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.addPlanBtn.setOnClickListener {
-//            val intent = Intent(this, SearchDestinationActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, SearchDestinationActivity::class.java)
+            startActivity(intent)
 
             val db = Firebase.firestore
             val plan = hashMapOf(
