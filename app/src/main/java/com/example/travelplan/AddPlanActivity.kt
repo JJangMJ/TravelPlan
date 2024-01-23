@@ -7,7 +7,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.travelplan.databinding.ActivityAddPlanBinding
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
@@ -15,8 +19,8 @@ import java.util.Date
 class AddPlanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddPlanBinding
 
-    var departureDate: LocalDate? = null
-    var endDate: LocalDate? = null
+    var departureLocalDate: LocalDate? = null
+    var endLocalDate: LocalDate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,36 +45,51 @@ class AddPlanActivity : AppCompatActivity() {
                 Toast.makeText(this, "목적지를 입력하세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            else if (departureDate == null) {
+            else if (departureLocalDate == null) {
                 Toast.makeText(this, "출발날짜를 고르세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            else if (endDate == null) {
+            else if (endLocalDate == null) {
                 Toast.makeText(this, "도착날짜를 고르세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val plan = Plan("a", destination, departureDate!!, endDate!!)
-            Log.d("@@@", destination!!.toString())
-            Log.d("@@@", departureDate!!.toString())
-            Log.d("@@@", endDate!!.toString())
+            val departureDate = Date.from(departureLocalDate!!.atStartOfDay(ZoneId.systemDefault()).toInstant())
+            val endDate = Date.from(endLocalDate!!.atStartOfDay(ZoneId.systemDefault()).toInstant())
+            val db = Firebase.firestore
+            val plan = hashMapOf(
+                "destination" to destination,
+                "startDate" to Timestamp(departureDate),
+                "endDate" to Timestamp(endDate)
+            )
 
-            finish()
+            db.collection("Plan")
+                .add(plan)
+                .addOnSuccessListener { documentReference ->
+
+                    finish()
+                }
         }
     }
 
     fun showDialog(dateBtn: String) {
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            val dateString  = "${year}-${month+1}-${dayOfMonth}"
+            var dateString  = "${year}-${month+1}-${dayOfMonth}"
+            if(month>10){
+                dateString  = "${year}-${month+1}-${dayOfMonth}"
+            }
+            else {
+                dateString  = "${year}-${0}${month+1}-${dayOfMonth}"
+            }
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val date = LocalDate.parse(dateString, formatter)
 
             if(dateBtn == "departureDateBtn") {
                 binding.departureDateBtn.text = dateString
-                departureDate = date
+                departureLocalDate = date
             } else {
                 binding.endDateBtn.text = dateString
-                endDate = date
+                endLocalDate = date
             }
         }
 
