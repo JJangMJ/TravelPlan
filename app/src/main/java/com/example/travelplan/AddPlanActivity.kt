@@ -56,8 +56,8 @@ class AddPlanActivity : AppCompatActivity() {
 
             val departureDate = Date.from(departureLocalDate!!.atStartOfDay(ZoneId.systemDefault()).toInstant())
             val endDate = Date.from(endLocalDate!!.atStartOfDay(ZoneId.systemDefault()).toInstant())
-            val db = Firebase.firestore
-            val plan = hashMapOf(
+            var db = Firebase.firestore
+            var plan = hashMapOf(
                 "destination" to destination,
                 "startDate" to Timestamp(departureDate),
                 "endDate" to Timestamp(endDate)
