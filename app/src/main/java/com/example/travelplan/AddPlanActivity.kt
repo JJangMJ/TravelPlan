@@ -74,13 +74,22 @@ class AddPlanActivity : AppCompatActivity() {
 
     fun showDialog(dateBtn: String) {
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
             var dateString  = "${year}-${month+1}-${dayOfMonth}"
-            if(month>10){
+
+            if(month>10 && dayOfMonth>=10){
                 dateString  = "${year}-${month+1}-${dayOfMonth}"
             }
-            else {
+            else if (month<10 && dayOfMonth>=10) {
                 dateString  = "${year}-${0}${month+1}-${dayOfMonth}"
             }
+            else if (month>10 && dayOfMonth<10) {
+                dateString  = "${year}-$${month+1}-${0}${dayOfMonth}"
+            }
+            else if (month<10 && dayOfMonth<10) {
+                dateString  = "${year}-${0}${month+1}-${0}${dayOfMonth}"
+            }
+
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val date = LocalDate.parse(dateString, formatter)
 
@@ -104,11 +113,3 @@ class AddPlanActivity : AppCompatActivity() {
         dateDialog.show()
     }
 }
-
-// real Final test
-// one more test2
-// one more test3
-// tq
-// create Jang branch
-// create Jang2 branch
-// idk
