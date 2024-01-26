@@ -1,35 +1,46 @@
 package com.example.travelplan
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan.databinding.ActivityMainBinding
 import java.time.LocalDate
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import java.time.ZoneId
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    val planList = ArrayList<Plan>()
+    lateinit var adapter: PlanAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initUI()
+        action()
+        fetchPlanList()
+    }
 
+    private fun initUI() {
+        adapter = PlanAdapter(planList)
+        binding.planListRv.adapter = adapter
+        binding.planListRv.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun action() {
         binding.addPlanBtn.setOnClickListener {
             val intent = Intent(this, AddPlanActivity::class.java)
             startActivity(intent)
         }
-
-        val planList = ArrayList<Plan>()
-        planList.add(Plan("a", "일본", LocalDate.now(), LocalDate.now().plusDays(10)))
-        planList.add(Plan("b", "중국", LocalDate.now(), LocalDate.now().plusDays(5)))
-        planList.add(Plan("c", "대만", LocalDate.now(), LocalDate.now().plusDays(4)))
-
-        val adapter = PlanAdapter(planList)
-        binding.planListRv.adapter = adapter
-        binding.planListRv.layoutManager = LinearLayoutManager(this)
 
         adapter.itemClicked.observe(this) {
             val intent = Intent(this, PlanActivity::class.java)
@@ -37,11 +48,26 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-}
+    private fun fetchPlanList() {
+        val db = FirebaseFirestore.getInstance()
+        val collectionRef = db.collection("Plan")
 
-//test test
-// just test 1
-// just test 123123
-//test test
-//testetetet
-//test2
+        collectionRef
+            .get()
+            .addOnSuccessListener { result ->
+                // Data Parsing
+                for (document in result) {
+                    val destination = document.data["destination"] as String
+                    val startDateTimestamp = document.data["startDate"] as Timestamp
+                    val startLocalDate = startDateTimestamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                    val endDateTimestamp = document.data["endDate"] as Timestamp
+                    val endLocalDate = endDateTimestamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+
+                    planList.add(Plan(document.id, destination, startLocalDate, endLocalDate))
+                }
+
+                adapter.planList = planList
+                adapter.notifyDataSetChanged()
+            }
+    }
+}
