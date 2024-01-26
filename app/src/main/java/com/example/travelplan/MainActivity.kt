@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
     private fun fetchPlanList() {
         val db = FirebaseFirestore.getInstance()
         val collectionRef = db.collection("Plan")
