@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".PlanActivity">
 
+    <Button
+        android:id="@+id/deletePlanBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일정 삭제" />
+
     <TextView
         android:id="@+id/destinationTv"
         android:layout_width="match_parent"

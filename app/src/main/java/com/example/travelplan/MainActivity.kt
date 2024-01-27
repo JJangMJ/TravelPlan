@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initUI()
         action()
+    }
+
+    override fun onStart() {
+        super.onStart()
         fetchPlanList()
     }
 
@@ -56,6 +60,8 @@ class MainActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 // Data Parsing
+                planList.clear()
+
                 for (document in result) {
                     val destination = document.data["destination"] as String
                     val startDateTimestamp = document.data["startDate"] as Timestamp

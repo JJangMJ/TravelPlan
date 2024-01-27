@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan.databinding.ActivityPlanBinding
+import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -15,6 +16,11 @@ class PlanActivity : AppCompatActivity() {
         binding = ActivityPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initUI()
+        action()
+    }
+
+    fun initUI() {
         val plan = intent.getSerializableExtra("plan") as Plan
         binding.destinationTv.setText(plan.destination)
         binding.departureDateTv.setText(plan.startDate.toString())
@@ -32,6 +38,12 @@ class PlanActivity : AppCompatActivity() {
 
         binding.dayRv.adapter = adapter
         binding.dayRv.layoutManager = LinearLayoutManager(this)
+    }
 
+    fun action() {
+        binding.deletePlanBtn.setOnClickListener {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("Plan")
+        }
     }
 }
