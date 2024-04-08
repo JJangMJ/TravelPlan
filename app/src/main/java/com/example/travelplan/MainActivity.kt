@@ -60,8 +60,7 @@ class MainActivity : AppCompatActivity() {
         collectionRef
             .get()
             .addOnSuccessListener { result ->
-                // Data Parsing
-                Log.d("showresult","$result")
+
                 for (document in result) {
                     val destination = document.data["destination"] as String
                     val startDateTimestamp = document.data["startDate"] as Timestamp
