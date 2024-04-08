@@ -66,6 +66,7 @@ class AddPlanActivity : AppCompatActivity() {
             db.collection("Plan")
                 .add(plan)
                 .addOnSuccessListener { documentReference ->
+                    Log.d("test","$documentReference")
 
                     finish()
                 }

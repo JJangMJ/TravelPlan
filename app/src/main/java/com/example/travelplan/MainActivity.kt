@@ -27,6 +27,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initUI()
         action()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        planList.clear()
         fetchPlanList()
     }
 
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 // Data Parsing
+                Log.d("showresult","$result")
                 for (document in result) {
                     val destination = document.data["destination"] as String
                     val startDateTimestamp = document.data["startDate"] as Timestamp
@@ -65,7 +71,6 @@ class MainActivity : AppCompatActivity() {
 
                     planList.add(Plan(document.id, destination, startLocalDate, endLocalDate))
                 }
-
                 adapter.planList = planList
                 adapter.notifyDataSetChanged()
             }
