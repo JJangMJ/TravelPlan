@@ -9,4 +9,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="day" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addPlanBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="계획추가" />
+    </LinearLayout>
+
 </LinearLayout>
