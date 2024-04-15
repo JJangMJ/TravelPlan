@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TravelPlan"
         tools:targetApi="31">
         <activity
-            android:name=".AddTimePlanActivity"
+            android:name=".AddDayPlanActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 

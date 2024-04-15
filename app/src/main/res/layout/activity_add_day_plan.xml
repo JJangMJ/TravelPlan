@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="18dp"
     android:orientation="vertical"
-    tools:context=".AddTimePlanActivity">
+    tools:context=".AddDayPlanActivity">
 
     <EditText
         android:id="@+id/writePlanTv"
@@ -19,23 +19,26 @@
         android:inputType="text" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/setStartTimeBtn"
-            android:layout_width="match_parent"
+            android:background="@drawable/custom_ripple_effect"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="8dp"
             android:text="시작 시간 설정" />
 
         <Button
             android:id="@+id/setEndTimeBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/custom_ripple_effect"
             android:text="종료 시간 설정" />
     </LinearLayout>
 
