@@ -1,4 +1,4 @@
-package com.example.travelplan
+package com.example.travelplan.DataClass
 
 import java.io.Serializable
 import java.time.LocalDate

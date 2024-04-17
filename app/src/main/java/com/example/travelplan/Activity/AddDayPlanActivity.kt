@@ -1,7 +1,6 @@
-package com.example.travelplan
+package com.example.travelplan.Activity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelplan.databinding.ActivityAddDayPlanBinding
@@ -12,7 +11,6 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Date
 
 class AddDayPlanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddDayPlanBinding
@@ -25,7 +23,6 @@ class AddDayPlanActivity : AppCompatActivity() {
         setContentView(binding.root)
         action()
         day = intent.getSerializableExtra("day") as LocalDate
-
     }
     private fun action() {
         binding.setStartTimeBtn.setOnClickListener {

@@ -1,9 +1,11 @@
-package com.example.travelplan
+package com.example.travelplan.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelplan.DataClass.Plan
+import com.example.travelplan.ViewHolder.PlanViewHolder
 import com.example.travelplan.databinding.ItemPlanBinding
 
 class PlanAdapter(var planList: ArrayList<Plan>) : RecyclerView.Adapter<PlanViewHolder>() {

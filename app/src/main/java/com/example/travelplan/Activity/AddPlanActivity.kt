@@ -1,10 +1,8 @@
-package com.example.travelplan
+package com.example.travelplan.Activity
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.travelplan.databinding.ActivityAddPlanBinding
 import com.google.firebase.Timestamp

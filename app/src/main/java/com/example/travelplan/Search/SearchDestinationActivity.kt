@@ -1,8 +1,9 @@
-package com.example.travelplan
+package com.example.travelplan.Search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.travelplan.R
 import com.example.travelplan.databinding.ActivitySearchDestinationBinding
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -17,7 +18,6 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
-import com.google.android.libraries.places.api.net.PlacesClient
 
 class SearchDestinationActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var binding: ActivitySearchDestinationBinding

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="18dp"
     android:orientation="vertical"
-    tools:context=".PlanActivity">
+    tools:context=".Activity.PlanActivity">
 
     <TextView
         android:id="@+id/destinationTv"

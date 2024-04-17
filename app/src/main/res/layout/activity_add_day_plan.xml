@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="18dp"
     android:orientation="vertical"
-    tools:context=".AddDayPlanActivity">
+    tools:context=".Activity.AddDayPlanActivity">
 
     <EditText
         android:id="@+id/writePlanTv"

@@ -1,17 +1,13 @@
-package com.example.travelplan
+package com.example.travelplan.Activity
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.travelplan.Adapter.PlanAdapter
+import com.example.travelplan.DataClass.Plan
 import com.example.travelplan.databinding.ActivityMainBinding
-import java.time.LocalDate
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.ZoneId
 
