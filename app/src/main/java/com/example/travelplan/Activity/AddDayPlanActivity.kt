@@ -13,10 +13,12 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class AddDayPlanActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddDayPlanBinding
     private lateinit var day: LocalDate
     lateinit var startDateTimestamp: Timestamp
     lateinit var endDateTimestamp: Timestamp
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddDayPlanBinding.inflate(layoutInflater)
@@ -24,6 +26,7 @@ class AddDayPlanActivity : AppCompatActivity() {
         action()
         day = intent.getSerializableExtra("day") as LocalDate
     }
+
     private fun action() {
         binding.setStartTimeBtn.setOnClickListener {
             binding.timePicker.setOnTimeChangedListener { context, hourOfDay, minute ->
@@ -49,6 +52,7 @@ class AddDayPlanActivity : AppCompatActivity() {
                 startDateTimestamp = Timestamp(instant.epochSecond, instant.nano)
             }
         }
+
         binding.setEndTimeBtn.setOnClickListener {
             binding.timePicker.setOnTimeChangedListener { context, hourOfDay, minute ->
                 binding.setEndTimeBtn.text = "종료 시간: ${hourOfDay}시 ${minute}분"
@@ -75,13 +79,18 @@ class AddDayPlanActivity : AppCompatActivity() {
         }
 
         binding.completeBtn.setOnClickListener {
-            if (binding.setStartTimeBtn.text != "시작 시간 설정" && binding.setEndTimeBtn.text != "종료 시간 설정") {
+
+            var planId = intent.getStringExtra("planId") as String
+
+            if (binding.setStartTimeBtn.text != "시작 시간 설정" && binding.setEndTimeBtn.text != "종료 시간 설정"
+                && binding.writePlanTv.text.isNotBlank()) {
                 var title = binding.writePlanTv.text.toString()
                 var db = Firebase.firestore
                 var dayPlan = hashMapOf(
                     "startTime" to startDateTimestamp,
                     "endTime" to endDateTimestamp,
-                    "title" to title
+                    "title" to title,
+                    "planId" to planId
                 )
 
                 db.collection("DayPlan")
@@ -90,8 +99,16 @@ class AddDayPlanActivity : AppCompatActivity() {
                         finish()
                     }
             }
+            else if (binding.setStartTimeBtn.text != "시작 시간 설정" && binding.setEndTimeBtn.text != "종료 시간 설정"
+                && binding.writePlanTv.text.isBlank()){
+                Toast.makeText(this,"일정을 추가해주세요!!", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.setStartTimeBtn.text == "시작 시간 설정" && binding.setEndTimeBtn.text == "종료 시간 설정"
+                && binding.writePlanTv.text.isBlank()) {
+                Toast.makeText(this,"일정과 시간을 설정해주세요!!", Toast.LENGTH_SHORT).show()
+            }
             else {
-                Toast.makeText(this,"시작 시간 또는 종료 시간을 먼저 설정해주세요!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"일정 또는 시간을 설정해주세요!!", Toast.LENGTH_SHORT).show()
             }
         }
     }
